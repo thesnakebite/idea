@@ -7,7 +7,7 @@
             <x-form.field name="password" type="password" label="Password" />
 
             <div class="flex justify-end">
-                <button class="btn h-10">Sign in</button>
+                <button class="btn h-10" data-test="login-button">Sign in</button>
             </div>
         </form>
     </x-form>
