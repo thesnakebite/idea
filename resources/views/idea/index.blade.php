@@ -21,7 +21,11 @@
                         <div class="text-muted-foreground text-xs mt-5">{{ $idea->created_at->diffForHumans() }}</div>
                     </x-card>
                 @empty
-                    <p class="text-sm text-muted-foreground">No ideas at this time.</p>
+                    <div class="inline-flex items-center gap-2">
+                        <x-hugeicons-bookmark-remove-01 class="size-7" />
+
+                        <p class="text-sm text-amber-500">No ideas at this time.</p>
+                    </div>
                 @endforelse
             </div>
         </div>
