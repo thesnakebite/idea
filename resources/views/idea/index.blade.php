@@ -9,6 +9,7 @@
                 @click="$dispatch('open-modal', 'create-idea')"
                 is="button"
                 type="button"
+                data-test="create-idea-button"
                 class="mt-10 cursor-pointer h-32 w-full text-left align-text-top"
             >
                 <p>What's the idea</p>
@@ -78,6 +79,7 @@
                                 class="btn flex-1 h-10"
                                 @click = "status = @js($status->value)"
                                 type="button"
+                                data-test="button-status-{{ $status->value }}"
                                 :class="{'btn-outlined': status !== @js($status->value)}"
                             >
                                 {{ $status->label() }}
@@ -98,7 +100,7 @@
 
                 <div class="flex justify-end gap-x-5">
                     <button type="button" class="btn btn-outlined" @click="$dispatch('close-modal')">Cancel</button>
-                    <button type="submit" class="btn">Create</button>
+                    <button type="submit" data-test="submit-idea" class="btn">Create</button>
                 </div>
             </div>
         </form>
