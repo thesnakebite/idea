@@ -1,5 +1,6 @@
 <x-layout>
     <div class="text-muted-foreground">
+        {{-- Header --}}
         <header class="py-8 md:py-12">
             <h1 class="text-3xl font-bold">Ideas</h1>
             <p class="text-muted-foreground text-sm mt-2">Capture your thoughts. Make a plan.</p>
@@ -16,6 +17,7 @@
             </x-card>
         </header>
 
+        {{-- Filtered --}}
         <div class="flex items-center justify-center space-x-3">
             <a href="/ideas" class="btn {{ request()->has('status') ? 'btn-outlined' : '' }}">All</a>
 
@@ -28,25 +30,25 @@
                 </a>
             @endforeach
         </div>
+    </div>
 
-        <div class="mt-10">
+    <div class="mt-10">
+        <div class="grid md:grid-cols-2 gap-6">
             @forelse ($ideas as $idea)
-                <div class="grid md:grid-cols-2 gap-6">
-                    <x-card href="{{ route('idea.show', $idea) }}">
-                        <h3 class="text-foreground text-lg">{{ $idea->title }}</h3>
+                <x-card href="{{ route('idea.show', $idea) }}">
+                    <h3 class="text-foreground text-lg">{{ $idea->title }}</h3>
 
-                        <div class="mt-1">
-                            <x-idea.status-label status="{{ $idea->status }}">
-                                {{ $idea->status->label() }}
-                            </x-idea.status-label>
-                        </div>
+                    <div class="mt-1">
+                        <x-idea.status-label status="{{ $idea->status }}">
+                            {{ $idea->status->label() }}
+                        </x-idea.status-label>
+                    </div>
 
-                        <div class="mt-5 line-clamp-3">{{ $idea->description }}</div>
-                        <div class="text-muted-foreground text-xs mt-5">{{ $idea->created_at->diffForHumans() }}</div>
-                    </x-card>
-                </div>
+                    <div class="mt-5 line-clamp-3">{{ $idea->description }}</div>
+                    <div class="text-muted-foreground text-xs mt-5">{{ $idea->created_at->diffForHumans() }}</div>
+                </x-card>
             @empty
-                <x-card class="flex justify-center items-center max-w-3xl mx-auto border border-primary/50">
+                <x-card class="md:col-span-2 flex justify-center items-center border border-primary/50">
                     <div class="inline-flex items-center gap-2">
                         <x-hugeicons-bookmark-remove-01 class="size-7" />
                         <p class="text-sm text-amber-500">No ideas at this time.</p>
@@ -65,6 +67,7 @@
         >
             @csrf
             <div class="space-y-6">
+                {{-- Title --}}
                 <x-form.field
                     label="Title"
                     name="title"
@@ -73,6 +76,7 @@
                     required
                 />
 
+                {{-- Status --}}
                 <div class="space-y-2">
                     <label for="status" class="label">Status</label>
 
@@ -94,6 +98,7 @@
                     <x-form.error name="status" />
                 </div>
 
+                {{-- Description --}}
                 <x-form.field
                     label="Description"
                     name="description"
@@ -101,6 +106,7 @@
                     placeholder="Describe your idea..."
                 />
 
+                {{-- Links --}}
                 <div>
                     <fieldset class="space-y-3">
                         <legend class="label">Links</legend>
@@ -145,6 +151,7 @@
                     </fieldset>
                 </div>
 
+                {{-- Actions --}}
                 <div class="flex justify-end gap-x-5">
                     <button type="button" class="btn btn-outlined" @click="$dispatch('close-modal')">Cancel</button>
                     <button type="submit" data-test="submit-idea" class="btn">Create</button>
