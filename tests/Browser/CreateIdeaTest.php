@@ -10,6 +10,10 @@ it('creates a new idea', function () {
         ->fill('title', 'Some Example Title')
         ->click('@button-status-completed')
         ->fill('description', 'An example description')
+        ->fill('@new-link', 'https://laracast.com')
+        ->click('@submit-new-link-button')
+        ->fill('@new-link', 'https://laravel.com')
+        ->click('@submit-new-link-button')
         ->click('@submit-idea')
         ->assertPathIs('/ideas');
 
@@ -17,5 +21,6 @@ it('creates a new idea', function () {
         'title' => 'Some Example Title',
         'status' => 'completed',
         'description' => 'An example description',
+        'links' => ['https://laracast.com', 'https://laravel.com'],
     ]);
 });
