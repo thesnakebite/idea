@@ -40,12 +40,37 @@
                 <div class="text-foreground max-w-none">{{ $idea->description }}</div>
             </x-card>
 
+            <h3 class="font-bold text-xl mt-6 text-muted-foreground">Actionable Steps</h3>
+            @if ($idea->steps->count())
+                <div class="mt-2 space-y-2">
+                    @foreach ($idea->steps as $step)
+                        <div>
+                            <form action="{{ route('step.update', $step) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+
+                                <div class="text-sm font-medium flex items-center gap-x-3">
+                                    <button type="submit"
+                                        aria-label="{{ $step->completed ? 'Mark as incomplete' : 'Mark as complete' }}"
+                                        class="size-5 flex items-center justify-center rounded-lg border border-primary {{ $step->completed ? 'bg-primary text-primary-foreground' : 'text-transparent' }}">
+                                        &check;
+                                    </button>
+                                    <span
+                                        class="{{ $step->completed ? 'line-through text-muted-foreground' : '' }}">{{ $step->description }}</span>
+                                </div>
+                            </form>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
             <h3 class="font-bold text-xl mt-6 text-muted-foreground">Links</h3>
             <div>
                 @if ($idea->links->count())
                     <div class="mt-2 space-y-2">
                         @foreach ($idea->links as $link)
-                            <x-card :href="$link" class="text-primary font-medium flex gap-x-3 items-center">
+                            <x-card :href="$link" target="_blank"
+                                class="text-primary font-medium flex gap-x-3 items-center">
                                 <x-hugeicons-link-01 />
                                 {{ $link }}
                             </x-card>
