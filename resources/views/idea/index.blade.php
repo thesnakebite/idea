@@ -32,7 +32,11 @@
                 <x-card href="{{ route('idea.show', $idea) }}">
                     @if ($idea->image_path)
                         <div class="mb-4 -mx-4 -mt-4 rounded-t-lg overflow-hidden">
-                            <img src="{{ asset('storage/' . $idea->image_path) }}" alt="{{ $idea->title }}" class="w-full h-auto object-cover">
+                            <img
+                                src="{{ asset('storage/' . $idea->image_path) }}"
+                                alt="{{ $idea->title }}"
+                                class="w-full h-auto object-cover"
+                            />
                         </div>
                     @endif
                     <h3 class="text-foreground text-lg">{{ $idea->title }}</h3>
@@ -59,12 +63,29 @@
 
     <!-- Modal -->
     <x-modal name="create-idea" title="New Idea">
-        <form x-data="{ status: 'pending', newLink: '', links: [], newStep: '', steps: [] }" method="POST" action="{{ route('idea.store') }}" enctype="multipart/form-data">
+        <form
+            x-data="{
+                status: 'pending',
+                newLink: '',
+                links: [],
+                newStep: '',
+                steps: []
+            }"
+            method="POST"
+            action="{{ route('idea.store') }}"
+            enctype="multipart/form-data"
+        >
             @csrf
+
             <div class="space-y-6">
                 {{-- Title --}}
-                <x-form.field label="Title" name="title" placeholder="Enter an idea for your title" autofocus
-                    required />
+                <x-form.field
+                    label="Title"
+                    name="title"
+                    placeholder="Enter an idea for your title"
+                    autofocus
+                    required
+                />
 
                 {{-- Status --}}
                 <div class="space-y-2">
@@ -85,8 +106,12 @@
                 </div>
 
                 {{-- Description --}}
-                <x-form.field label="Description" name="description" type="textarea"
-                    placeholder="Describe your idea..." />
+                <x-form.field
+                    label="Description"
+                    name="description"
+                    type="textarea"
+                    placeholder="Describe your idea..."
+                />
 
                 {{-- Image --}}
                 <div class="space-y-2">
@@ -94,7 +119,6 @@
 
                     <input type="file" id="image" name="image" accept="image/*" />
                     <x-form.error name="image" />
-
                 </div>
 
                 {{-- Steps --}}
@@ -114,12 +138,21 @@
                         </template>
 
                         <div class="flex gap-x-2 items-center">
-                            <input x-model="newStep" id="new-step" data-test="new-step"
-                                placeholder="What needs to be done?" class="input flex-1" spellcheck="false" />
+                            <input
+                                x-model="newStep"
+                                id="new-step"
+                                data-test="new-step"
+                                placeholder="What needs to be done?"
+                                class="input flex-1"
+                                spellcheck="false"
+                            />
 
-                            <button type="button" @click="steps.push(newStep.trim()); newStep = '';"
-                                data-test="submit-new-step-button" :disabled="newStep.trim().length === 0"
-                                aria-label="Add a new step">
+                            <button
+                                type="button" @click="steps.push(newStep.trim()); newStep = '';"
+                                data-test="submit-new-step-button"
+                                :disabled="newStep.trim().length === 0"
+                                aria-label="Add a new step"
+                            >
                                 <x-hugeicons-plus-sign class="form-muted-icon" />
                             </button>
                         </div>
@@ -135,21 +168,36 @@
                             <div class="flex gap-x-2 items-center">
                                 <label for="" class="sr-only text-xs">Links</label>
                                 <input name="links[]" x-model="link" class="input text-primary ">
-                                <button type="button" aria-label="Remove link" @click="links.splice(index, 1)"
-                                    class="form-muted-icon">
+                                <button
+                                    type="button"
+                                    aria-label="Remove link"
+                                    @click="links.splice(index, 1)"
+                                    class="form-muted-icon"
+                                >
                                     <x-hugeicons-minus-sign class="form-muted-icon" />
                                 </button>
                             </div>
                         </template>
 
                         <div class="flex gap-x-2 items-center">
-                            <input x-model="newLink" type="url" id="new-link" data-test="new-link"
-                                placeholder="https://example.com" autocomplete="url" class="input flex-1"
-                                spellcheck="false" />
+                            <input
+                                x-model="newLink"
+                                type="url"
+                                id="new-link"
+                                data-test="new-link"
+                                placeholder="https://example.com"
+                                autocomplete="url"
+                                class="input flex-1"
+                                spellcheck="false"
+                            />
 
-                            <button type="button" @click="links.push(newLink.trim()); newLink = '';"
-                                data-test="submit-new-link-button" :disabled="newLink.trim().length === 0"
-                                aria-label="Add a new link">
+                            <button
+                                type="button"
+                                @click="links.push(newLink.trim()); newLink = '';"
+                                data-test="submit-new-link-button"
+                                :disabled="newLink.trim().length === 0"
+                                aria-label="Add a new link"
+                            >
                                 <x-hugeicons-plus-sign class="form-muted-icon" />
                             </button>
                         </div>
