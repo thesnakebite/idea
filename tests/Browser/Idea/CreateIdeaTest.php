@@ -21,7 +21,9 @@ it('creates a new idea', function () {
         ->click('@submit-idea')
         ->assertPathIs('/ideas');
 
-    expect($idea = $user->ideas()->first())->toMatchArray([
+    expect($idea = $user->ideas()->first())->not->toBeNull();
+
+    expect($idea)->toMatchArray([
         'title' => 'Some Example Title',
         'status' => 'completed',
         'description' => 'An example description',
