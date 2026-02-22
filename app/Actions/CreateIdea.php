@@ -15,7 +15,7 @@ class CreateIdea
         //
     }
 
-    public function handle(array $attributes): void
+    public function handle(array $attributes)
     {
         $data = collect($attributes)->only([
             'title', 'description', 'status', 'links',

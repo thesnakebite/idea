@@ -5,8 +5,14 @@
             <h1 class="text-3xl font-bold">Ideas</h1>
             <p class="text-muted-foreground text-sm mt-2">Capture your thoughts. Make a plan.</p>
 
-            <x-card x-data @click="$dispatch('open-modal', 'create-idea')" is="button" type="button"
-                data-test="create-idea-button" class="mt-10 cursor-pointer h-32 w-full text-left align-text-top">
+            <x-card
+                x-data
+                @click="$dispatch('open-modal', 'create-idea')"
+                is="button"
+                type="button"
+                data-test="create-idea-button"
+                class="mt-10 cursor-pointer h-32 w-full text-left align-text-top"
+            >
                 <p>What's the idea</p>
             </x-card>
         </header>
@@ -69,11 +75,12 @@
                 newLink: '',
                 links: [],
                 newStep: '',
-                steps: []
+                steps: [],
+                hasImage: false
             }"
             method="POST"
             action="{{ route('idea.store') }}"
-            enctype="multipart/form-data"
+            x-bind:enctype="hasImage ? 'multipart/form-data' : false"
         >
             @csrf
 
@@ -117,7 +124,7 @@
                 <div class="space-y-2">
                     <label for="image" class="label">Featured Image</label>
 
-                    <input type="file" id="image" name="image" accept="image/*" />
+                    <input type="file" id="image" name="image" accept="image/*" @change="hasImage = true" />
                     <x-form.error name="image" />
                 </div>
 
