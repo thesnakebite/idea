@@ -9,7 +9,11 @@
 
             {{-- Acctions --}}
             <div class="gap-x-3 flex items-center">
-                <button class="btn btn-outlined">
+                <button
+                    x-data
+                    class="btn btn-outlined"
+                    @click="$dispatch('open-modal', 'edit-idea')"
+                >
                     <x-hugeicons-ai-editing class="size-5" />
                     Edit Idea
                 </button>
@@ -108,4 +112,6 @@
 
         </div>
     </div>
+
+    <x-idea.modal :idea="$idea" />
 </x-layout>

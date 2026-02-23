@@ -11,7 +11,7 @@ it('must be signed in to view an idea', function () {
 
 it('disallows accessing an idea you did not create authentication', function () {
     $user = User::factory()->create();
-    
+
     $this->actingAs($user);
 
     $idea = Idea::factory()->create();
