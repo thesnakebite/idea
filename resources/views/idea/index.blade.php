@@ -41,7 +41,7 @@
                             <img
                                 src="{{ asset('storage/' . $idea->image_path) }}"
                                 alt="{{ $idea->title }}"
-                                class="w-full h-auto object-cover"
+                                class="w-full h-80 object-cover"
                             />
                         </div>
                     @endif
