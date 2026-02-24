@@ -104,6 +104,7 @@
                         <div class="flex gap-x-2 items-center">
                             <input
                                 :name="`steps[${index}][description]`"
+                                :data-test="`step-description-${index}`"
                                 x-model="step.description"
                                 class="input text-primary"
                                 readonly

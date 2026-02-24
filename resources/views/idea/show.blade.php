@@ -13,6 +13,7 @@
                     x-data
                     class="btn btn-outlined"
                     @click="$dispatch('open-modal', 'edit-idea')"
+                    data-test="edit-idea-button"
                 >
                     <x-hugeicons-ai-editing class="size-5" />
                     Edit Idea
