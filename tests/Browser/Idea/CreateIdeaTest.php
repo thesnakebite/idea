@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 
 it('creates a new idea', function () {
@@ -18,7 +20,7 @@ it('creates a new idea', function () {
         ->click('@submit-new-step-button')
         ->fill('@new-step', 'Do another thing')
         ->click('@submit-new-step-button')
-        ->click('@submit-idea')
+        ->click('Create')
         ->assertPathIs('/ideas');
 
     expect($idea = $user->ideas()->first())->not->toBeNull();

@@ -10,7 +10,7 @@
             newLink: '',
             links: @js(old('links', $idea->links ?? [])),
             newStep: '',
-            steps: @js(old('steps', $idea->steps->map(fn($step) => $step->description))),
+            steps: @js(old('steps', $idea->steps->map->only(['id', 'description', 'completed']))),
             hasImage: false
         }"
         method="POST"
@@ -100,11 +100,18 @@
                 <fieldset class="space-y-3">
                     <legend class="label">Actionable Steps</legend>
 
-                    <template x-for="(step, index) in steps" :key="step">
+                    <template x-for="(step, index) in steps" :key="step.id || index">
                         <div class="flex gap-x-2 items-center">
                             <input
-                                name="steps[]"
-                                x-model="step"
+                                :name="`steps[${index}][description]`"
+                                x-model="step.description"
+                                class="input text-primary"
+                                readonly
+                            >
+                            <input
+                                type="hidden"
+                                :name="`steps[${index}][completed]`"
+                                :value="step.completed ? '1' : '0'"
                                 class="input text-primary"
                                 readonly
                             >
@@ -130,7 +137,8 @@
                         />
 
                         <button
-                            type="button" @click="steps.push(newStep.trim()); newStep = '';"
+                            type="button"
+                            @click="steps.push({description: newStep.trim(), completed:false}); newStep='';"
                             data-test="submit-new-step-button"
                             :disabled="newStep.trim().length === 0"
                             aria-label="Add a new step"
@@ -152,7 +160,8 @@
                             <input
                                 name="links[]"
                                 x-model="link"
-                                class="input text-primary "
+                                class="input text-primary"
+                                readonly
                             >
                             <button
                                 type="button"
@@ -201,7 +210,6 @@
                 </button>
                 <button
                     type="submit"
-                    data-test="submit-idea"
                     class="btn"
                 >
                     {{ $idea->exists ? 'Update' : 'Create' }}
