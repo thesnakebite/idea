@@ -16,6 +16,8 @@
             @endguest
 
             @auth()
+                <a href="{{ route('profile.edit') }}" class="text-sm">Profile Edit</a>
+
                 <form action="/logout" method="POST">
                     @csrf
 

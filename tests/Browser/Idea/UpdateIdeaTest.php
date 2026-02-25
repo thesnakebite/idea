@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use App\Models\Idea;
 use App\Models\Step;
 use App\Models\User;
