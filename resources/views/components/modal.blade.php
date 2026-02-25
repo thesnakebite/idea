@@ -28,7 +28,7 @@
             <h2 id="modal-{{ $name }}-title" class="text-xl font-bold">{{ $title }}</h2>
 
             <button @click="show = false" aria-label="Close Modal">
-                <x-hugeicons-x-variable-circle class="size-6" />
+                <x-hugeicons-add-01 class="size-6 rotate-45" />
             </button>
         </div>
         <div class="mt-8">
